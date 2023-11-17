@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { AgGridReact } from "ag-grid-react"
 
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs'
 
 import "ag-grid-community/styles/ag-grid.css"
 import "ag-grid-community/styles/ag-theme-material.css"
@@ -14,38 +14,19 @@ function TrainingList() {
     }, [])
 
     const fetchTrainings = () => {
-        fetch("https://traineeapp.azurewebsites.net/api/trainings")
+        fetch(import.meta.env.VITE_API_URL + '/gettrainings')
           .then((response) => {
             if (!response.ok)
-              throw new Error("Something went wrong: " + response.statusText);
-            return response.json();
+              throw new Error("Something went wrong: " + response.statusText)
+            return response.json()
           })
-          .then((data) => {
-            //map is used to apply the follwing to the each element of array
-            const trainingPromises = data.content.map((training) =>
-            // finding the link to the customer
-              fetch(training.links.find((link) => link.rel === "customer").href)
-                .then((response) => {
-                    if (!response.ok)
-                        throw new Error("Something went wrong: " + response.statusText);
-                    return response.json();
-                })
-                .then((customerData) => ({
-                  ...training,
-                  customerName: customerData.firstname + " " + customerData.lastname,
-                }))
-            );
-    
-            // Resolve all promises and update state
-            Promise.all(trainingPromises).then((updatedTrainings) => {
-              setTrainings(updatedTrainings);
-            });
-          })
-          .catch((err) => console.error(err));
+          .then(data => setTrainings(data)) 
+          .catch(error => console.error("Error fetching trainings:", error))
       };
     
       const [columnDefs] = useState([
-        { field: 'customerName', headerName: 'Customer Name', sortable: true, filter: true },
+        { field: 'customerName', headerName: 'Customer Name', sortable: true, filter: true,
+        valueGetter: params => params.data.customer.firstname + ' ' + params.data.customer.lastname, },
         { field: 'date', headerName: 'Date', sortable: true, filter: true, 
         valueFormatter: params => params.value ? dayjs(params.value).format("DD.MM.YYYY") : "" },
         { field: 'duration', headerName: 'Duration', sortable: true, filter: true, width: 140 },

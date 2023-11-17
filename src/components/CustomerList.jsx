@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { AgGridReact } from "ag-grid-react";
+import { useState, useEffect } from "react"
+import { AgGridReact } from "ag-grid-react"
 
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-material.css";
+import "ag-grid-community/styles/ag-grid.css"
+import "ag-grid-community/styles/ag-theme-material.css"
 
 function CustomerList() {
     const [customers, setCustomers] = useState([])
@@ -12,7 +12,7 @@ function CustomerList() {
     }, [])
 
     const fetchCustomers = () => {
-        fetch("https://traineeapp.azurewebsites.net/api/customers")
+        fetch(import.meta.env.VITE_API_URL + '/api/customers')
         .then(response => {
             if(!response.ok)
                 throw new Error("Something went wrong: " + response.statusText)
@@ -23,14 +23,14 @@ function CustomerList() {
     }
 
     const [columnDefs] = useState([
-        { field: 'firstname', sortable: true, filter: true},
-        { field: 'lastname', sortable: true, filter: true},
+        { field: 'firstname', sortable: true, filter: true, width: 170},
+        { field: 'lastname', sortable: true, filter: true, width: 150},
         { field: 'streetaddress', sortable: true, filter: true},
-        { field: 'postcode', sortable: true, filter: true, width: 100},
+        { field: 'postcode', sortable: true, filter: true, width: 150},
         { field: 'city', sortable: true, filter: true, width: 170},
         { field: 'email', sortable: true, filter: true, width: 250},
         { field: 'phone', sortable: true, filter: true, width: 140},
-    ]);
+    ])
 
     return(
         <>

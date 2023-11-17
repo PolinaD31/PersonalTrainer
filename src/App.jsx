@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <div className='App'>
-        <AppBar>
+        <AppBar position='static'>
           <Toolbar>
             <nav>
             <Button color="inherit" component={Link} to="/">
