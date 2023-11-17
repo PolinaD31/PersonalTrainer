@@ -28,7 +28,7 @@ function TrainingList() {
         { field: 'customerName', headerName: 'Customer Name', sortable: true, filter: true,
         valueGetter: params => params.data.customer.firstname + ' ' + params.data.customer.lastname, },
         { field: 'date', headerName: 'Date', sortable: true, filter: true, 
-        valueFormatter: params => params.value ? dayjs(params.value).format("DD.MM.YYYY") : "" },
+        valueFormatter: params => params.value ? dayjs(params.value).format("DD.MM.YYYY HH:MM") : "" },
         { field: 'duration', headerName: 'Duration', sortable: true, filter: true, width: 140 },
         { field: 'activity', headerName: 'Activity', sortable: true, filter: true },
       ]);
