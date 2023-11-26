@@ -1,10 +1,10 @@
-import { useState } from 'react'; 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import { useState } from 'react'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
 
 export default function EditCustomer({ customerdata, fetchCustomers }) {
   const [open, setOpen] = useState(false);
@@ -29,11 +29,11 @@ export default function EditCustomer({ customerdata, fetchCustomers }) {
       phone: customerdata.phone
     })
       setOpen(true);
-  };
+  }
 
   const handleClose = () => {
     setOpen(false);
-  };
+  }
 
   const handleSave = () => {
     fetch(customerdata.links[0].href, {
@@ -45,11 +45,11 @@ export default function EditCustomer({ customerdata, fetchCustomers }) {
         if (!response.ok)
             throw new Error("Editing failed: " + response.statusText);
 
-            fetchCustomers();
+            fetchCustomers()
     })
     .catch(err => console.error(err))
 
-    handleClose();
+    handleClose()
   }
 
   return (
@@ -123,5 +123,5 @@ export default function EditCustomer({ customerdata, fetchCustomers }) {
         </DialogActions>
       </Dialog>
     </>
-  );
+  )
 }

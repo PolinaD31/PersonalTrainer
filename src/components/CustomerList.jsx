@@ -4,7 +4,7 @@ import { Snackbar, Button  } from "@mui/material"
 import AddCustomer from "./AddCustomer"
 import EditCustomer from "./EditCustomer"
 import AddTraining from "./AddTraining"
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import FileDownloadIcon from '@mui/icons-material/FileDownload'
 
 import "ag-grid-community/styles/ag-grid.css"
 import "ag-grid-community/styles/ag-theme-material.css"
@@ -72,10 +72,10 @@ function CustomerList() {
     const onBtnExport = useCallback(() => {
         const params = {
             columnKeys: ["firstname", "lastname", "streetaddress", "postcode", "city", "email", "phone"]
-        };
+        }
     
-        gridRef.current.api.exportDataAsCsv(params);
-    }, []);
+        gridRef.current.api.exportDataAsCsv(params)
+    }, [])
 
     return(
         <>

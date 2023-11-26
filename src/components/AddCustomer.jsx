@@ -1,10 +1,11 @@
-import { useState } from 'react'; 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import { useState } from 'react'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import AddIcon from '@mui/icons-material/Add'
 
 export default function AddCustomer({ fetchCustomers }) {
   const [open, setOpen] = useState(false);
@@ -20,11 +21,11 @@ export default function AddCustomer({ fetchCustomers }) {
 
   const handleClickOpen = () => {
     setOpen(true);
-  };
+  }
 
   const handleClose = () => {
     setOpen(false);
-  };
+  }
 
   const handleSave = () => {
     fetch(import.meta.env.VITE_API_URL + '/api/customers', {
@@ -45,7 +46,7 @@ export default function AddCustomer({ fetchCustomers }) {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen} style={{ marginTop: 7 }}>
+      <Button variant="outlined" onClick={handleClickOpen} startIcon={<AddIcon />} style={{ marginTop: 7 }}>
         Add Customer
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -114,5 +115,5 @@ export default function AddCustomer({ fetchCustomers }) {
         </DialogActions>
       </Dialog>
     </>
-  );
+  )
 }

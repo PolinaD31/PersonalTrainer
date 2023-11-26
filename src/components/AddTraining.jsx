@@ -1,13 +1,13 @@
-import { useState } from 'react'; 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { useState } from 'react'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DateTimePicker } from '@mui/x-date-pickers'
 
 export default function AddTraining({ customerdata, fetchTrainings, setAddTrainingSnackbarOpen }) {
   const [open, setOpen] = useState(false);
@@ -22,11 +22,11 @@ export default function AddTraining({ customerdata, fetchTrainings, setAddTraini
   const handleClickOpen = () => {
     setOpen(true);
     setTraining({...training, customer: customerdata.links[0].href})
-  };
+  }
 
   const handleClose = () => {
     setOpen(false);
-  };
+  }
 
   const handleSave = () => {
     fetch(import.meta.env.VITE_API_URL + '/api/trainings', {
@@ -38,11 +38,11 @@ export default function AddTraining({ customerdata, fetchTrainings, setAddTraini
     .then(response => {
         if (!response.ok)
             throw new Error("Addition failed: " + response.statusText);
-        setAddTrainingSnackbarOpen(true);
+        setAddTrainingSnackbarOpen(true)
     })
     .catch(err => console.error(err))
 
-    handleClose();
+    handleClose()
   }
 
   return (
@@ -88,5 +88,5 @@ export default function AddTraining({ customerdata, fetchTrainings, setAddTraini
         </DialogActions>
       </Dialog>
     </>
-  );
+  )
 }

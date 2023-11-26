@@ -24,7 +24,7 @@ function TrainingList() {
           })
           .then(data => setTrainings(data)) 
           .catch(error => console.error("Error fetching trainings:", error))
-      };
+      }
 
       const deleteTraining = (id) => {
         if(window.confirm("Are you sure you want to delete this training?")) {
@@ -52,7 +52,7 @@ function TrainingList() {
           cellRenderer: params => <Button variant="outlined" size="small" onClick={() => deleteTraining(params.data.id)}>Delete</Button>,
           width: 120
       },
-      ]);
+      ])
 
     return(
         <>
