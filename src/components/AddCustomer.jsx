@@ -45,7 +45,7 @@ export default function AddCustomer({ fetchCustomers }) {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen} style={{ marginTop: 4 }}>
+      <Button variant="outlined" onClick={handleClickOpen} style={{ marginTop: 7 }}>
         Add Customer
       </Button>
       <Dialog open={open} onClose={handleClose}>
