@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { Button, Snackbar } from "@mui/material"
 import { AgGridReact } from "ag-grid-react"
+import { fetchTrainings } from "./FetchTrainings"
 
 import dayjs from 'dayjs'
 
@@ -12,19 +13,10 @@ function TrainingList() {
     const [deleteSnackbarOpen, setDeleteSnackbarOpen] = useState(false)
 
     useEffect(() => {
-        fetchTrainings()
+      fetchTrainings()
+      .then(data => setTrainings(data))
+      .catch(error => console.error("Error fetching trainings:", error))
     }, [])
-
-    const fetchTrainings = () => {
-        fetch(import.meta.env.VITE_API_URL + '/gettrainings')
-          .then((response) => {
-            if (!response.ok)
-              throw new Error("Something went wrong: " + response.statusText)
-            return response.json()
-          })
-          .then(data => setTrainings(data)) 
-          .catch(error => console.error("Error fetching trainings:", error))
-      }
 
       const deleteTraining = (id) => {
         if(window.confirm("Are you sure you want to delete this training?")) {

@@ -48,12 +48,12 @@ function CustomerList() {
     }
 
     const [columnDefs] = useState([
-        { field: 'firstname', sortable: true, filter: true, width: 170},
-        { field: 'lastname', sortable: true, filter: true, width: 150},
+        { field: 'firstname', sortable: true, filter: true, width: 140},
+        { field: 'lastname', sortable: true, filter: true, width: 140},
         { field: 'streetaddress', sortable: true, filter: true},
-        { field: 'postcode', sortable: true, filter: true, width: 150},
-        { field: 'city', sortable: true, filter: true, width: 170},
-        { field: 'email', sortable: true, filter: true, width: 250},
+        { field: 'postcode', sortable: true, filter: true, width: 130},
+        { field: 'city', sortable: true, filter: true, width: 150},
+        { field: 'email', sortable: true, filter: true, width: 200},
         { field: 'phone', sortable: true, filter: true, width: 140},
         {
             cellRenderer: params => <Button variant="outlined" size="small" onClick={() => deleteCustomer(params.data.links[0].href)}>Delete</Button>,

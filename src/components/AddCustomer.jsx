@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import AddIcon from '@mui/icons-material/Add'
 
 export default function AddCustomer({ fetchCustomers }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const [customer, setCustomer] = useState({
     firstname: "", 
     lastname: "", 
@@ -20,11 +20,11 @@ export default function AddCustomer({ fetchCustomers }) {
 
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen(true)
   }
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen(false)
   }
 
   const handleSave = () => {
@@ -35,13 +35,13 @@ export default function AddCustomer({ fetchCustomers }) {
     })
     .then(response => {
         if (!response.ok)
-            throw new Error("Addition failed: " + response.statusText);
+            throw new Error("Addition failed: " + response.statusText)
 
-            fetchCustomers();
+            fetchCustomers()
     })
     .catch(err => console.error(err))
 
-    handleClose();
+    handleClose()
   }
 
   return (

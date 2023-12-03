@@ -28,11 +28,11 @@ export default function EditCustomer({ customerdata, fetchCustomers }) {
       email: customerdata.email, 
       phone: customerdata.phone
     })
-      setOpen(true);
+      setOpen(true)
   }
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen(false)
   }
 
   const handleSave = () => {
@@ -43,7 +43,7 @@ export default function EditCustomer({ customerdata, fetchCustomers }) {
     })
     .then(response => {
         if (!response.ok)
-            throw new Error("Editing failed: " + response.statusText);
+            throw new Error("Editing failed: " + response.statusText)
 
             fetchCustomers()
     })

@@ -10,7 +10,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DateTimePicker } from '@mui/x-date-pickers'
 
 export default function AddTraining({ customerdata, fetchTrainings, setAddTrainingSnackbarOpen }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const [training, setTraining] = useState({
     date: "",
     activity: "",
@@ -20,12 +20,12 @@ export default function AddTraining({ customerdata, fetchTrainings, setAddTraini
 
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen(true)
     setTraining({...training, customer: customerdata.links[0].href})
   }
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen(false)
   }
 
   const handleSave = () => {
