@@ -27,8 +27,7 @@ function CustomerList() {
 
     const deleteCustomer = (url) => {
         if(window.confirm("Are you sure?")) {
-            const secureUrl = url.replace(/^http:\/\//i, 'https://')
-            fetch(secureUrl, {method: "DELETE"})
+            fetch(url, {method: "DELETE"})
         .then(response => {
             if(!response.ok) {
                 throw new Error("Error during delition: " + response.statusText)
