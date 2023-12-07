@@ -29,7 +29,6 @@ function CustomerList() {
         if(window.confirm("Are you sure?")) {
             // For netlify to not block with "mixed request"
             url = url.replace("http://", "https://")
-            console.log(url)
             fetch(url, {method: "DELETE"})
         .then(response => {
             if(!response.ok) {
