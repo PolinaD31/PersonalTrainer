@@ -46,8 +46,8 @@ export default function AddTraining({ customerdata, fetchTrainings, setAddTraini
   }
 
   return (
-    <>
-      <Button variant="outlined" onClick={handleClickOpen}>
+    <div>
+      <Button variant='outlined' size='small' onClick={handleClickOpen}>
         Add Training
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -87,6 +87,6 @@ export default function AddTraining({ customerdata, fetchTrainings, setAddTraini
           <Button onClick={handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   )
 }

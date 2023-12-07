@@ -19,7 +19,7 @@ export default function ActivityChart() {
         const groupedData = _.groupBy(trainings, 'activity')
         const preparedData = Object.keys(groupedData).map((activity) => ({
             activity,
-            'totalDuration': _.sumBy(groupedData[activity], 'duration'),
+            'Duration': _.sumBy(groupedData[activity], 'duration'),
           }))
           return preparedData
     }
@@ -33,7 +33,7 @@ export default function ActivityChart() {
                 <YAxis label={{ value: 'Duration (min)', angle: -90, position: 'insideLeft' }} />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="totalDuration" fill="#8884d8" label={false} />
+                <Bar dataKey="Duration" fill="#8884d8"/>
             </BarChart>
             </div>
         </>

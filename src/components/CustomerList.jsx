@@ -1,10 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { AgGridReact } from "ag-grid-react"
 import { Snackbar, Button  } from "@mui/material"
+import { fetchCustomers } from "./FetchCustomers"
 import AddCustomer from "./AddCustomer"
 import EditCustomer from "./EditCustomer"
 import AddTraining from "./AddTraining"
+import IconButton from '@mui/material/IconButton'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 import "ag-grid-community/styles/ag-grid.css"
 import "ag-grid-community/styles/ag-theme-material.css"
@@ -18,18 +21,9 @@ function CustomerList() {
 
     useEffect(() => {
         fetchCustomers()
-    }, [])
-
-    const fetchCustomers = () => {
-        fetch(import.meta.env.VITE_API_URL + '/api/customers')
-        .then(response => {
-            if(!response.ok)
-                throw new Error("Something went wrong: " + response.statusText)
-            return response.json()
-        })
         .then(data => setCustomers(data.content))
         .catch(err => console.error(err))
-    }
+    }, [])
 
     const deleteCustomer = (url) => {
         if(window.confirm("Are you sure?")) {
@@ -54,24 +48,28 @@ function CustomerList() {
         { field: 'postcode', sortable: true, filter: true, width: 130},
         { field: 'city', sortable: true, filter: true, width: 150},
         { field: 'email', sortable: true, filter: true, width: 200},
-        { field: 'phone', sortable: true, filter: true, width: 140},
+        { field: 'phone', sortable: true, filter: true, width: 130},
         {
-            cellRenderer: params => <Button variant="outlined" size="small" onClick={() => deleteCustomer(params.data.links[0].href)}>Delete</Button>,
-            width: 120
+            cellRenderer: params => 
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                <IconButton color="error" size="small" onClick={() => deleteCustomer(params.data.links[0].href)}><DeleteIcon /></IconButton>
+            </div>,
+            width: 20
         },
         {
             cellRenderer: params => <EditCustomer customerdata={params.data} fetchCustomers={fetchCustomers} />,
-            width: 120
+            width: 20
         },
          {
             cellRenderer: params => <AddTraining customerdata={params.data} fetchCustomers={fetchCustomers} setAddTrainingSnackbarOpen={setAddTrainingSnackbarOpen} />,
-            width: 190
+            width: 150
         }
     ])
 
     const onBtnExport = useCallback(() => {
         const params = {
-            columnKeys: ["firstname", "lastname", "streetaddress", "postcode", "city", "email", "phone"]
+            columnKeys: ["firstname", "lastname", "streetaddress", "postcode", "city", "email", "phone"],
+            fileName: "customers.csv"
         }
     
         gridRef.current.api.exportDataAsCsv(params)
