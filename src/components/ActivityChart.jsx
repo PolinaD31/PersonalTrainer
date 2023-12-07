@@ -10,7 +10,6 @@ export default function ActivityChart() {
         fetchTrainings()
           .then(data => {
             setChartAvtivities(prepareTrainingData(data))
-            console.log('rendered')
           })
           .catch(error => console.error("Error fetching trainings:", error))
       }, [])

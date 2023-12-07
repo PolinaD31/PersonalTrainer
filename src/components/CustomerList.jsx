@@ -26,11 +26,8 @@ function CustomerList() {
     }, [])
 
     const deleteCustomer = (url) => {
-        // for netlify to allow the fetch 
-        const secureUrl = url.startsWith('http://') ? url.replace(/^http:\/\//i, 'https://') : url
-        
         if(window.confirm("Are you sure?")) {
-            fetch(secureUrl, {method: "DELETE"})
+            fetch(url, {method: "DELETE"})
         .then(response => {
             if(!response.ok) {
                 throw new Error("Error during delition: " + response.statusText)
