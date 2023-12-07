@@ -9,7 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DateTimePicker } from '@mui/x-date-pickers'
 
-export default function AddTraining({ customerdata, fetchTrainings, setAddTrainingSnackbarOpen }) {
+export default function AddTraining({ customerdata, fetchTrainings, TrainingSnackbarOpen }) {
   const [open, setOpen] = useState(false)
   const [training, setTraining] = useState({
     date: "",
@@ -38,7 +38,7 @@ export default function AddTraining({ customerdata, fetchTrainings, setAddTraini
     .then(response => {
         if (!response.ok)
             throw new Error("Addition failed: " + response.statusText);
-        setAddTrainingSnackbarOpen(true)
+            TrainingSnackbarOpen("Training added succesfully!")
     })
     .catch(err => console.error(err))
 

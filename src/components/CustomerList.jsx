@@ -15,7 +15,7 @@ import "ag-grid-community/styles/ag-theme-material.css"
 function CustomerList() {
     const [customers, setCustomers] = useState([])
     const [open, setOpen] = useState(false)
-    const [addTrainingSnackbarOpen, setAddTrainingSnackbarOpen] = useState(false)
+    const [snackbarText, setSnackbarText] = useState("")
 
     const gridRef = useRef()
 
@@ -27,18 +27,25 @@ function CustomerList() {
 
     const deleteCustomer = (url) => {
         if(window.confirm("Are you sure?")) {
-            fetch(url, {method: "DELETE"})
+            const secureUrl = url.replace(/^http:\/\//i, 'https://')
+            fetch(secureUrl, {method: "DELETE"})
         .then(response => {
             if(!response.ok) {
                 throw new Error("Error during delition: " + response.statusText)
             } else {
                 setOpen(true)
+                setSnackbarText("Customer deleted succesfully!")
                 fetchCustomers().then(data => setCustomers(data.content))
             }
         }) 
         .catch(error => console.log(error))
 
         }
+    }
+
+    const openTrainingAddedSnackbar = (text) => {
+        setOpen(true)
+        setSnackbarText(text)
     }
 
     const [columnDefs] = useState([
@@ -57,11 +64,11 @@ function CustomerList() {
             width: 20
         },
         {
-            cellRenderer: params => <EditCustomer customerdata={params.data} fetchCustomers={fetchCustomers} />,
+            cellRenderer: params => <EditCustomer customerdata={params.data} fetchCustomers={fetchCustomers} setCustomers={setCustomers} />,
             width: 20
         },
          {
-            cellRenderer: params => <AddTraining customerdata={params.data} fetchCustomers={fetchCustomers} setAddTrainingSnackbarOpen={setAddTrainingSnackbarOpen} />,
+            cellRenderer: params => <AddTraining customerdata={params.data} fetchCustomers={fetchCustomers} TrainingSnackbarOpen={openTrainingAddedSnackbar} />,
             width: 150
         }
     ])
@@ -94,13 +101,7 @@ function CustomerList() {
                 open={open}
                 autoHideDuration={3000}
                 onClose={() => setOpen(false)}
-                message="Customer deleted succesfully"
-            />
-            <Snackbar
-                open={addTrainingSnackbarOpen}
-                autoHideDuration={3000}
-                onClose={() => setAddTrainingSnackbarOpen(false)}
-                message="Training added succesfully"
+                message={snackbarText}
             />
         </>
     )

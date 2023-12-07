@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import IconButton from '@mui/material/IconButton'
 import EditIcon from '@mui/icons-material/Edit'
 
-export default function EditCustomer({ customerdata, fetchCustomers }) {
+export default function EditCustomer({ customerdata, fetchCustomers, setCustomers }) {
   const [open, setOpen] = useState(false)
   const [customer, setCustomer] = useState({
     firstname: "", 
@@ -47,7 +47,7 @@ export default function EditCustomer({ customerdata, fetchCustomers }) {
         if (!response.ok)
             throw new Error("Editing failed: " + response.statusText)
 
-            fetchCustomers()
+            fetchCustomers().then(data => setCustomers(data.content))
     })
     .catch(err => console.error(err))
 
