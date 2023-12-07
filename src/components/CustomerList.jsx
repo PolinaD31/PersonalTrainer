@@ -27,12 +27,14 @@ function CustomerList() {
 
     const deleteCustomer = (url) => {
         if(window.confirm("Are you sure?")) {
+            // For netlify to not block with "mixed request"
+            url = url.replace("http://", "https://")
+            console.log(url)
             fetch(url, {method: "DELETE"})
         .then(response => {
             if(!response.ok) {
                 throw new Error("Error during delition: " + response.statusText)
             } else {
-                console.log(url)
                 setOpen(true)
                 setSnackbarText("Customer deleted succesfully!")
                 fetchCustomers().then(data => setCustomers(data.content))
