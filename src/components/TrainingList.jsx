@@ -30,7 +30,7 @@ function TrainingList() {
             throw new Error("Error during deletion" + response.statusText)
           } else {
             setDeleteSnackbarOpen(true)
-            fetchTrainings()
+            fetchTrainings().then(data => setTrainings(data))
           }
         })
         .catch(err => console.log(err))

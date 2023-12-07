@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import AddIcon from '@mui/icons-material/Add'
 
-export default function AddCustomer({ fetchCustomers }) {
+export default function AddCustomer({ fetchCustomers, setCustomers }) {
   const [open, setOpen] = useState(false)
   const [customer, setCustomer] = useState({
     firstname: "", 
@@ -36,8 +36,7 @@ export default function AddCustomer({ fetchCustomers }) {
     .then(response => {
         if (!response.ok)
             throw new Error("Addition failed: " + response.statusText)
-
-            fetchCustomers()
+            fetchCustomers().then(data => setCustomers(data.content))
     })
     .catch(err => console.error(err))
 

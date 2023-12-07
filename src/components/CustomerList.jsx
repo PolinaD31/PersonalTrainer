@@ -21,8 +21,8 @@ function CustomerList() {
 
     useEffect(() => {
         fetchCustomers()
-        .then(data => setCustomers(data.content))
-        .catch(err => console.error(err))
+            .then(data => setCustomers(data.content))
+            .catch(err => console.error(err))
     }, [])
 
     const deleteCustomer = (url) => {
@@ -33,7 +33,7 @@ function CustomerList() {
                 throw new Error("Error during delition: " + response.statusText)
             } else {
                 setOpen(true)
-                fetchCustomers()
+                fetchCustomers().then(data => setCustomers(data.content))
             }
         }) 
         .catch(error => console.log(error))
@@ -77,7 +77,7 @@ function CustomerList() {
 
     return(
         <>
-            <AddCustomer fetchCustomers={fetchCustomers} />
+            <AddCustomer fetchCustomers={fetchCustomers} setCustomers={setCustomers} />
             <Button onClick={onBtnExport} component="label" variant="contained" startIcon={<FileDownloadIcon />} style={{ marginTop: 7, marginLeft: 4 }}>
                 Download CSV
             </Button>
