@@ -38,8 +38,9 @@ export default function EditCustomer({ customerdata, fetchCustomers, setCustomer
   }
 
   const handleSave = () => {
-    // Replace for neylifyto not block as a "mixed request"
-    fetch(customerdata.links[0].href.replace("http://", "https://"), {
+    // For netlify to not block as a "mixed request"
+    const url = customerdata.links[0].href.replace("http://", "https://")
+    fetch(url, {
         method: 'PUT', 
         headers: { 'Content-type':'application/json' },
         body: JSON.stringify(customer)
