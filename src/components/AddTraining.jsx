@@ -21,7 +21,9 @@ export default function AddTraining({ customerdata, fetchTrainings, TrainingSnac
 
   const handleClickOpen = () => {
     setOpen(true)
-    setTraining({...training, customer: customerdata.links[0].href})
+    // For netlify to not block as a "mixed request"
+    const url = customerdata.links[0].href.replace("http://", "https://")
+    setTraining({...training, customer: url})
   }
 
   const handleClose = () => {
