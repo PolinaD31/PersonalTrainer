@@ -49,7 +49,7 @@ function CustomerList() {
         setSnackbarText(text)
     }
 
-    const [columnDefs] = useState([
+    const columnDefs = [
         { field: 'firstname', sortable: true, filter: true, width: 140},
         { field: 'lastname', sortable: true, filter: true, width: 140},
         { field: 'streetaddress', sortable: true, filter: true},
@@ -72,7 +72,7 @@ function CustomerList() {
             cellRenderer: params => <AddTraining customerdata={params.data} fetchCustomers={fetchCustomers} TrainingSnackbarOpen={openTrainingAddedSnackbar} />,
             width: 150
         }
-    ])
+    ]
 
     const onBtnExport = useCallback(() => {
         const params = {
